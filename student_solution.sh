@@ -1,14 +1,11 @@
-# Student Solution – SELinux Permanent File Context
-
-```bash
 #!/bin/bash
 
 # ============================================================
 # SELinux Permanent File Context Assignment
 # ============================================================
 #
-# Student Name:
-# Register Number:
+# Student Name:Abirami 
+# Register Number:1U24IT003
 #
 # Complete all TODO sections.
 # Do not modify the test files.
@@ -24,12 +21,14 @@ echo "=========================================="
 # TODO 1:
 # Create the directory /webdata/files
 # ------------------------------------------------------------
+mkdir -p /webdata/files
 
 
 # ------------------------------------------------------------
 # TODO 2:
 # Create the file /webdata/files/index.html
 # ------------------------------------------------------------
+touch /webdata/files/index.html
 
 
 # ------------------------------------------------------------
@@ -37,6 +36,9 @@ echo "=========================================="
 # Display the current SELinux context
 # of /webdata and index.html
 # ------------------------------------------------------------
+
+ls -Zd /webdata
+ls -Z /webdata/files/index.html
 
 
 # ------------------------------------------------------------
@@ -49,7 +51,7 @@ echo "=========================================="
 #
 # Use semanage fcontext
 # ------------------------------------------------------------
-
+semanage fcontext -a -t httpd_sys_content_t "/webdata(/.*)?"
 
 # ------------------------------------------------------------
 # TODO 5:
@@ -57,12 +59,15 @@ echo "=========================================="
 # using restorecon recursively.
 # ------------------------------------------------------------
 
+restorecon -Rv /webdata
 
 # ------------------------------------------------------------
 # TODO 6:
 # Verify the final SELinux contexts
 # of /webdata and index.html
 # ------------------------------------------------------------
+ls -Zd /webdata
+ls -Z /webdata/files/index.html
 
 
 echo "=========================================="
